@@ -28,24 +28,25 @@ public class Evento
         }
         set
         {
-            if (value < 0)
+            if (value <= 0)
             {
-                throw new Exception("La capienza non può essere un numeo negativo");
+                throw new Exception("La capienza non può essere un numero negativo");
             }
             _capienzaMassima = value;
         }
     }
-    public int postiPrenotati { get; private set; }
+    public int PostiPrenotati { get; private set; }
     public DateTime Data { get; set; }
 
     //costruttore
 
-    public Evento(string titolo, DateTime data, int CapienzaMassima)
+    public Evento(string titolo, DateTime data, int capienzaMassima)
     {
-        Titolo = titolo;
+        _titolo = titolo;
         Data = data;
-        CapienzaMassima = 0;
-       
+        CapienzaMassima = capienzaMassima;
+        PostiPrenotati = 0;
+
     }
 
     public void PrenotaPosti(int postiDaAggiungere)
@@ -54,11 +55,11 @@ public class Evento
         {
             throw new Exception("La data dell'evento è già passata");
         }
-        if (CapienzaMassima < 0 || postiDaAggiungere + postiPrenotati > CapienzaMassima)
+        if (CapienzaMassima < 0 || postiDaAggiungere + PostiPrenotati > CapienzaMassima)
         {
             throw new Exception("Non ci sono posti disponibili");
         }
-        postiPrenotati += postiDaAggiungere;
+        PostiPrenotati += postiDaAggiungere;
        
     }
 
@@ -68,11 +69,11 @@ public class Evento
         {
             throw new Exception("La data dell'evento è già passata");
         }
-        if (CapienzaMassima < 0 || postiDaRimuovere + postiPrenotati > 0)
+        if (CapienzaMassima < 0 && postiDaRimuovere + PostiPrenotati > 0)
         {
             throw new Exception("Non ci sono posti disponibili");
         }
-        postiPrenotati -= postiDaRimuovere;
+        PostiPrenotati -= postiDaRimuovere;
     }
 
     public override string ToString()
