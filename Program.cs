@@ -1,10 +1,24 @@
 ﻿
 
-Evento tomorroland = new Evento("Tomorroland", DateTime.Parse("03/07/2022"), 300);
+using System.Collections.Generic;
 
-Console.WriteLine(tomorroland);
 
-RegistraEvento();
+//Evento tomorroland = new Evento("Tomorroland", DateTime.Parse("03/07/2022"), 300);
+//Console.WriteLine(tomorroland);
+
+ProgrammaEventi vivaticket = new ProgrammaEventi("Vivaticket");
+vivaticket.AvviaProgrammaEventi();
+
+//RegistraEvento();
+Console.WriteLine(vivaticket.StampaEventi());
+
+
+//Console.WriteLine(vivaticket.EventiPerData("22/10/2024"));
+//Console.WriteLine(ProgrammaEventi.StampaEventi(vivaticket.Eventi));
+//StampaEventi(vivaticket);
+//Console.WriteLine(ProgrammaEventi.StampaListaEventi(vivaticket.Eventi));
+
+
 
 void RegistraEvento()
 {
@@ -43,6 +57,7 @@ void RegistraPrenotazioni(Evento evento)
     //Console.WriteLine("Quanti posti vuoi prenotare?");
     //int postiPrenotati = Convert.ToInt32(Console.ReadLine());
     Console.WriteLine("I posti prenotati sono {0}, i posti rimanenti sono {1}", prenotazioni, evento.CapienzaMassima - evento.PostiPrenotati);
+
 }
 
 void RegistraDisdette(Evento evento)
@@ -52,7 +67,3 @@ void RegistraDisdette(Evento evento)
     evento.DisdiciPosti(disdette);
     Console.WriteLine("I posti disdetti sono {0}, i posti rimanenti sono {1}", disdette, evento.CapienzaMassima - evento.PostiPrenotati);
 }
-
-
-
-
