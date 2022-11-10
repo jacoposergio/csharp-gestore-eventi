@@ -4,7 +4,22 @@ using System.Runtime.CompilerServices;
 
 public class ProgrammaEventi
 {
-    public string Titolo { get; set; }
+    private string _titolo;
+    public string Titolo
+    {
+        get
+        {
+            return _titolo;
+        }
+        set
+        {
+            if (value == "")
+            {
+                throw new ProgrammaEventiException("Il titolo è mancante");
+            }
+            _titolo = value;
+        }
+    }
     public List<Evento> Eventi { get; set; }
 
     public ProgrammaEventi(string titolo)

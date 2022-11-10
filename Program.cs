@@ -17,9 +17,12 @@ using System.Collections.Generic;
 //Console.WriteLine(ProgrammaEventi.StampaListaEventi(vivaticket.Eventi));
 //Console.WriteLine(vivaticket.EventiPerData("22/10/2024"));
 
+
 Console.WriteLine("Inserisci titolo programma eventi");
 string programmaEventiUtente = Console.ReadLine();
 ProgrammaEventi programmaEventi = new ProgrammaEventi(programmaEventiUtente);
+
+
 
 Console.WriteLine("Quanti eventi vuoi organizzare");
 int numeroEventiUtente = Convert.ToInt32(Console.ReadLine());
@@ -31,7 +34,7 @@ for(int i = 1; i <= numeroEventiUtente; i++)
 
 Console.WriteLine("Il numero di eventi presente è: " + programmaEventi.ContaEventi());
 Console.WriteLine("Questi sono tutti gli eventi: " + programmaEventi.StampaEventi());
-Console.WriteLine("Inserisci una data per sapere se ci sono eventi (formato dd/MM/yyyy");
+Console.WriteLine("Inserisci una data per sapere se ci sono eventi (formato dd/MM/yyyy)");
 string dataInserita = Console.ReadLine();
 List<Evento> ListaEventiPerData = programmaEventi.EventiPerData(dataInserita);
 Console.WriteLine(ProgrammaEventi.StampaListaEventi(ListaEventiPerData));

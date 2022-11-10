@@ -14,7 +14,7 @@ public class Evento
         {
             if( value == null || value == "")
             {
-                throw new Exception("Il titolo è mancante");
+                throw new ProgrammaEventiException("Il titolo è mancante");
             }
             _titolo = value;
         }
@@ -30,7 +30,7 @@ public class Evento
         {
             if (value <= 0)
             {
-                throw new Exception("La capienza non può essere un numero negativo");
+                throw new  ProgrammaEventiException("La capienza non può essere un numero negativo");
             }
             _capienzaMassima = value;
         }
@@ -42,7 +42,7 @@ public class Evento
 
     public Evento(string titolo, DateTime data, int capienzaMassima)
     {
-        _titolo = titolo;
+        Titolo = titolo;
         Data = data;
         CapienzaMassima = capienzaMassima;
         PostiPrenotati = 0;
@@ -53,11 +53,11 @@ public class Evento
     {
         if (Data < DateTime.Now )
         {
-            throw new Exception("La data dell'evento è già passata");
+            throw new ProgrammaEventiException("La data dell'evento è già passata");
         }
         if (CapienzaMassima < 0 || postiDaAggiungere + PostiPrenotati > CapienzaMassima)
         {
-            throw new Exception("Non ci sono posti disponibili");
+            throw new ProgrammaEventiException("Non ci sono posti disponibili");
         }
         PostiPrenotati += postiDaAggiungere;
        
@@ -67,11 +67,11 @@ public class Evento
     {
         if (Data < DateTime.Now)
         {
-            throw new Exception("La data dell'evento è già passata");
+            throw new ProgrammaEventiException("La data dell'evento è già passata");
         }
         if (CapienzaMassima < 0 && postiDaRimuovere + PostiPrenotati > 0)
         {
-            throw new Exception("Non ci sono posti disponibili");
+            throw new ProgrammaEventiException("Non ci sono posti disponibili");
         }
         PostiPrenotati -= postiDaRimuovere;
     }
@@ -80,7 +80,5 @@ public class Evento
     {
         return Data.ToString("dd/MM/yyyy") + " " + Titolo;
     }
-
-
 
 }
