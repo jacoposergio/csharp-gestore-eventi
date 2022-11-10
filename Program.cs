@@ -43,9 +43,24 @@ while (loop)
                 for (int i = 1; i <= numeroEventiUtente; i++)
                 {
                     Console.WriteLine("Aggiunta Evento " + i + ":");
-                    RegistraEvento();
+                    Console.WriteLine("Premi 0 per aggiungere un evento generico, 1 per aggiungere una conferenza");
+                    int inputUtente = Convert.ToInt32(Console.ReadLine());
+                    try
+                    {
+                        if (inputUtente == 0)
+                            RegistraEvento();
+                        if (inputUtente == 1)
+                            RegistraConferenza();
+                        else
+                        {
+                            throw new ProgrammaEventiException("Valore inserito non valido");
+                        }
+                    }
+                    catch (ProgrammaEventiException e)
+                    {
+                        Console.WriteLine("error: {0}", e.Message);
+                    }
                 }
-
                 Console.WriteLine("Il numero di eventi presente è: " + programmaEventi.ContaEventi());
                 Console.WriteLine("Questi sono tutti gli eventi: " + programmaEventi.StampaEventi());
             }
@@ -61,6 +76,8 @@ while (loop)
             {
                 Console.WriteLine("Il numero di eventi presente è: " + programmaEventi.ContaEventi());
                 Console.WriteLine("Questi sono tutti gli eventi: " + programmaEventi.StampaEventi());
+                Console.WriteLine(ProgrammaEventi.StampaListaEventi(programmaEventi.Eventi));
+
             }
             catch (ProgrammaEventiException e)
             {
@@ -127,12 +144,6 @@ while (loop)
 
 
 
-
-
-
-
-
-
 void RegistraEvento()
 {
     Console.WriteLine("\r\nRegistra evento\r\n");
@@ -179,4 +190,22 @@ void RegistraDisdette(Evento evento)
             break;
     }
    
+}
+
+void RegistraConferenza()
+{
+    Console.WriteLine("\r\nRegistra conferenza\r\n");
+    Console.WriteLine("inserisci il titolo della conferenza");
+    string titolo = Console.ReadLine();
+    Console.WriteLine("inserisci il nome del relatore");
+    string relatore = Console.ReadLine();
+    Console.WriteLine("inserisci il prezzo");
+    double prezzo = Convert.ToDouble(Console.ReadLine());
+    Console.WriteLine("inserisci la data dell'evento nel formato 'dd/MM/yyyy'");
+    string data = Console.ReadLine();
+    Console.WriteLine("inserisci la capienza massima dell'evento");
+    int capienzaMassima = Convert.ToInt32(Console.ReadLine());
+
+    Evento evento = new Evento(titolo, DateTime.Parse(data), capienzaMassima);
+    programmaEventi.AggiungiEvento(evento);
 }

@@ -80,5 +80,4 @@ public class Evento
     {
         return Data.ToString("dd/MM/yyyy") + " " + Titolo;
     }
-
 }

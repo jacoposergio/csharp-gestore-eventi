@@ -88,7 +88,7 @@ public class ProgrammaEventi
 
         foreach (Evento item in Eventi)
         {
-            output += item + "\r\n";
+            output += item.ToString() + "\r\n";
         }
         return output;
     }
