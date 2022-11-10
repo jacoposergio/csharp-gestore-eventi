@@ -13,37 +13,37 @@ public class ProgrammaEventi
         Eventi = new List<Evento>();
     }
 
-    public void AvviaProgrammaEventi()
-    {
-        AggiungiEvento("Concerto di Gigione", "22/10/2024", 300);
-        AggiungiEvento("Festivalbar", "10/02/2022", 30000);
-        AggiungiEvento("Bello figo live on stage", "02/01/2023", 3000);
-    }
-        public void AggiungiEvento(string titolo, string data, int capienzaMassima)
-    {
-        DateTime dataConvertita = DateTime.Parse(data);
-        Evento evento = new Evento(titolo, dataConvertita, capienzaMassima);
-        Eventi.Add(evento);
-    }
+    //public void AvviaProgrammaEventi()
+    //{
+    //    AggiungiEvento("Concerto di Gigione", "22/10/2024", 300);
+    //    AggiungiEvento("Festivalbar", "10/02/2022", 30000);
+    //    AggiungiEvento("Bello figo live on stage", "02/01/2023", 3000);
+    //}
+    //    public void AggiungiEvento(string titolo, string data, int capienzaMassima)
+    //{
+    //    DateTime dataConvertita = DateTime.Parse(data);
+    //    Evento evento = new Evento(titolo, dataConvertita, capienzaMassima);
+    //    Eventi.Add(evento);
+    //}
 
     public void AggiungiEvento(Evento evento)
     {
         Eventi.Add(evento);
     }
 
-    public string EventiPerData(string data)
+    public List<Evento> EventiPerData(string data)
     {
-        string output = "";
         DateTime dataConvertita = DateTime.Parse(data);
+        List<Evento> eventiPerData = new List<Evento>();
  
         foreach (Evento item in Eventi)
         {
             if (item.Data == dataConvertita)
             {
-                output += item ;
+                eventiPerData.Add(item);
             }
         }
-        return output;
+        return eventiPerData;
     }
 
     public int ContaEventi()
