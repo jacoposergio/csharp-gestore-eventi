@@ -22,24 +22,106 @@ Console.WriteLine("Inserisci titolo programma eventi");
 string programmaEventiUtente = Console.ReadLine();
 ProgrammaEventi programmaEventi = new ProgrammaEventi(programmaEventiUtente);
 
-
-
-Console.WriteLine("Quanti eventi vuoi organizzare");
-int numeroEventiUtente = Convert.ToInt32(Console.ReadLine());
-for(int i = 1; i <= numeroEventiUtente; i++)
+bool loop = true;
+while (loop)
 {
-    Console.WriteLine("Aggiunta Evento " + i +":");
-    RegistraEvento();
+    Console.WriteLine("Scegli un opzione");
+    Console.WriteLine("1) Registra un evento");
+    Console.WriteLine("2) Informazioni eventi");
+    Console.WriteLine("3) Cerca un evento tramite data");
+    Console.WriteLine("4) Svuota la lista eventi");
+    Console.WriteLine("5) Esci");
+    int risposta = Convert.ToInt32(Console.ReadLine());
+
+    switch (risposta)
+    {
+        case 1:
+            try
+            {
+                Console.WriteLine("Quanti eventi vuoi organizzare");
+                int numeroEventiUtente = Convert.ToInt32(Console.ReadLine());
+                for (int i = 1; i <= numeroEventiUtente; i++)
+                {
+                    Console.WriteLine("Aggiunta Evento " + i + ":");
+                    RegistraEvento();
+                }
+
+                Console.WriteLine("Il numero di eventi presente è: " + programmaEventi.ContaEventi());
+                Console.WriteLine("Questi sono tutti gli eventi: " + programmaEventi.StampaEventi());
+            }
+            catch (ProgrammaEventiException e)
+            {
+                Console.WriteLine("error: {0}", e.Message);
+            }
+            break;
+
+
+        case 2:
+            try
+            {
+                Console.WriteLine("Il numero di eventi presente è: " + programmaEventi.ContaEventi());
+                Console.WriteLine("Questi sono tutti gli eventi: " + programmaEventi.StampaEventi());
+            }
+            catch (ProgrammaEventiException e)
+            {
+                Console.WriteLine("error: {0}", e.Message);
+            }
+            break;
+
+
+        case 3:
+            try
+            {
+                Console.WriteLine("Inserisci una data per sapere se ci sono eventi (formato dd/MM/yyyy)");
+                string dataInserita = Console.ReadLine();
+                List<Evento> ListaEventiPerData = programmaEventi.EventiPerData(dataInserita);
+                Console.WriteLine(ProgrammaEventi.StampaListaEventi(ListaEventiPerData));
+            }
+            catch (ProgrammaEventiException e)
+            {
+                Console.WriteLine("error: {0}", e.Message);
+            }
+            break;
+
+
+        case 4:
+            try
+            {
+                programmaEventi.SvuotaEventi();
+                Console.WriteLine("Il numero di eventi presente è: " + programmaEventi.ContaEventi());
+            }
+            catch (ProgrammaEventiException e)
+            {
+                Console.WriteLine("error: {0}", e.Message);
+            }
+            break;
+
+
+        case 5:
+            loop = false;
+            break;
+        default:
+            Console.WriteLine("Sei capace di premere un tasto?");
+            break;
+    }
 }
 
-Console.WriteLine("Il numero di eventi presente è: " + programmaEventi.ContaEventi());
-Console.WriteLine("Questi sono tutti gli eventi: " + programmaEventi.StampaEventi());
-Console.WriteLine("Inserisci una data per sapere se ci sono eventi (formato dd/MM/yyyy)");
-string dataInserita = Console.ReadLine();
-List<Evento> ListaEventiPerData = programmaEventi.EventiPerData(dataInserita);
-Console.WriteLine(ProgrammaEventi.StampaListaEventi(ListaEventiPerData));
-programmaEventi.SvuotaEventi();
-Console.WriteLine("Il numero di eventi presente è: " + programmaEventi.ContaEventi());
+//Console.WriteLine("Quanti eventi vuoi organizzare");
+//int numeroEventiUtente = Convert.ToInt32(Console.ReadLine());
+//for(int i = 1; i <= numeroEventiUtente; i++)
+//{
+//    Console.WriteLine("Aggiunta Evento " + i +":");
+//    RegistraEvento();
+//}
+
+//Console.WriteLine("Il numero di eventi presente è: " + programmaEventi.ContaEventi());
+//Console.WriteLine("Questi sono tutti gli eventi: " + programmaEventi.StampaEventi());
+//Console.WriteLine("Inserisci una data per sapere se ci sono eventi (formato dd/MM/yyyy)");
+//string dataInserita = Console.ReadLine();
+//List<Evento> ListaEventiPerData = programmaEventi.EventiPerData(dataInserita);
+//Console.WriteLine(ProgrammaEventi.StampaListaEventi(ListaEventiPerData));
+//programmaEventi.SvuotaEventi();
+//Console.WriteLine("Il numero di eventi presente è: " + programmaEventi.ContaEventi());
 
 
 
